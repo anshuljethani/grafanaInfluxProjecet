@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "MySQL",
-      "label": "MySQL",
+      "name": "DS_GITLAB",
+      "label": "Gitlab",
       "description": "",
       "type": "datasource",
       "pluginId": "influxdb",
@@ -48,6 +48,7 @@
       }
     ]
   },
+  "description": "",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -58,43 +59,64 @@
   "rows": [
     {
       "collapse": false,
-      "height": 272,
+      "height": 202,
       "panels": [
         {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 1,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": true,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_GITLAB}",
+          "format": "ms",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
           },
-          "lines": false,
-          "linewidth": 1,
+          "id": 7,
+          "interval": null,
           "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
           "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 3,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
           "targets": [
             {
-              "alias": "insert",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -110,7 +132,7 @@
                   "type": "fill"
                 }
               ],
-              "measurement": "mysql_mysql",
+              "measurement": "rails_transactions",
               "orderByTime": "ASC",
               "policy": "default",
               "refId": "A",
@@ -119,7 +141,7 @@
                 [
                   {
                     "params": [
-                      "commands_insert"
+                      "duration"
                     ],
                     "type": "field"
                   },
@@ -129,16 +151,79 @@
                   }
                 ]
               ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
+              "tags": []
+            }
+          ],
+          "thresholds": "50,1000",
+          "timeFrom": null,
+          "title": "Response Time",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_GITLAB}",
+          "format": "ms",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 8,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
             },
             {
-              "alias": "delete",
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 3,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -154,16 +239,16 @@
                   "type": "fill"
                 }
               ],
-              "measurement": "mysql_mysql",
+              "measurement": "rails_transactions",
               "orderByTime": "ASC",
               "policy": "default",
-              "refId": "B",
+              "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "commands_delete"
+                      "sql_duration"
                     ],
                     "type": "field"
                   },
@@ -173,16 +258,80 @@
                   }
                 ]
               ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
+              "tags": []
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "title": "SQL Time",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_GITLAB}",
+          "format": "ms",
+          "gauge": {
+            "maxValue": 1000,
+            "minValue": 0,
+            "show": true,
+            "thresholdLabels": false,
+            "thresholdMarkers": false
+          },
+          "hideTimeOverride": false,
+          "id": 9,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
             },
             {
-              "alias": "select",
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 3,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -198,16 +347,16 @@
                   "type": "fill"
                 }
               ],
-              "measurement": "mysql_mysql",
+              "measurement": "rails_method_calls",
               "orderByTime": "ASC",
               "policy": "default",
-              "refId": "C",
+              "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "commands_select"
+                      "duration"
                     ],
                     "type": "field"
                   },
@@ -217,16 +366,79 @@
                   }
                 ]
               ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
+              "tags": []
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "title": "Git Time",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_GITLAB}",
+          "format": "ms",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 10,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
             },
             {
-              "alias": "update",
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 3,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -242,16 +454,16 @@
                   "type": "fill"
                 }
               ],
-              "measurement": "mysql_mysql",
+              "measurement": "rails_transactions",
               "orderByTime": "ASC",
               "policy": "default",
-              "refId": "D",
+              "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "commands_update"
+                      "view_duration"
                     ],
                     "type": "field"
                   },
@@ -261,41 +473,129 @@
                   }
                 ]
               ],
-              "tags": [
+              "tags": []
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "title": "View Time",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 258,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_GITLAB}",
+          "fill": 1,
+          "id": 1,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "usage",
+              "dsType": "influxdb",
+              "groupBy": [
                 {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
                 }
-              ]
+              ],
+              "measurement": "rails_memory_usage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Queries",
+          "title": "Rails Memory Usage",
           "tooltip": {
-            "shared": false,
+            "shared": true,
             "sort": 0,
             "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
             "buckets": null,
-            "mode": "series",
+            "mode": "time",
             "name": null,
             "show": true,
-            "values": [
-              "total"
-            ]
+            "values": []
           },
           "yaxes": [
             {
-              "format": "ops",
+              "format": "bits",
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": "0",
+              "min": null,
               "show": true
             },
             {
@@ -313,7 +613,237 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "MySQL",
+          "datasource": "${DS_GITLAB}",
+          "fill": 1,
+          "id": 2,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "usage",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "sidekiq_memory_usage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Sidekiq Memory Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bits",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 225,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_GITLAB}",
+          "fill": 1,
+          "id": 3,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "[[tag_method]]",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "method"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "rails_method_calls",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "duration"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Method Call Counts",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_GITLAB}",
           "fill": 1,
           "id": 4,
           "legend": {
@@ -335,12 +865,12 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 4,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "alias": "queries",
+              "alias": "[[tag_view]]",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -351,139 +881,9 @@
                 },
                 {
                   "params": [
-                    "null"
+                    "view"
                   ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "queries"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Queries",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ops",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": true,
-          "colors": [
-            "#c15c17",
-            "rgba(237, 129, 40, 0.89)",
-            "#299c46"
-          ],
-          "datasource": "MySQL",
-          "decimals": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 1,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": false
-          },
-          "id": 17,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
+                  "type": "tag"
                 },
                 {
                   "params": [
@@ -492,7 +892,7 @@
                   "type": "fill"
                 }
               ],
-              "measurement": "mysql_mysql",
+              "measurement": "rails_views",
               "orderByTime": "ASC",
               "policy": "default",
               "refId": "A",
@@ -501,7 +901,7 @@
                 [
                   {
                     "params": [
-                      "slave_running"
+                      "duration"
                     ],
                     "type": "field"
                   },
@@ -514,634 +914,10 @@
               "tags": []
             }
           ],
-          "thresholds": "0,1",
-          "title": "Replication Slave",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "OFF",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ON",
-              "value": "1"
-            }
-          ],
-          "valueName": "diff"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-          ],
-          "datasource": "MySQL",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 18,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "threads_connected"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": null,
-          "title": "Open Connections",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 229,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-          ],
-          "datasource": "MySQL",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 2,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": true,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "connections"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": null,
-          "title": "Connections Attempts",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-          ],
-          "datasource": "MySQL",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 16,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": true,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "questions"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": "",
-          "title": "Statements",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-          ],
-          "datasource": "MySQL",
-          "decimals": 1,
-          "format": "s",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 8,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "s",
-          "postfixFontSize": "80%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "uptime"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": "1h",
-          "title": "Uptime",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "received",
-              "transform": "negative-Y"
-            }
-          ],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "received",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT derivative(mean(\"bytes_received\"), 1s)*8 FROM \"mysql_mysql\" WHERE (\"server\" = '/^$Server$/') AND $timeFilter GROUP BY time($__interval) fill(null)",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "bytes_received"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "sent",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT derivative(mean(\"bytes_sent\"), 1s)*8 FROM \"mysql_mysql\" WHERE (\"server\" = '/^$Server$/') AND $timeFilter GROUP BY time($__interval) fill(null)",
-              "rawQuery": true,
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "bytes_sent"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Network Traffic",
+          "title": "Views Timings",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1157,7 +933,7 @@
           },
           "yaxes": [
             {
-              "format": "bps",
+              "format": "ms",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -1184,14 +960,126 @@
     },
     {
       "collapse": false,
-      "height": 258,
+      "height": 220,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "MySQL",
+          "datasource": "${DS_GITLAB}",
+          "fill": 1,
+          "id": 6,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "[[tag_action]]",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "action"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "rails_transactions",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "duration"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Rails Transactions",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_GITLAB}",
           "fill": 1,
           "id": 5,
           "legend": {
@@ -1213,1449 +1101,12 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Opened tables",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "opened_tables"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Opened files",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "opened_files"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Tables & Files",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 6,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 5,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Rows",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "sort_rows"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "Range",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "sort_range"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "Scan",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "sort_scan"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "Merge Passes",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "sort_merge_passes"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Sorts",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ops",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 7,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 3,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "queries",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "slow_queries"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Slow Queries",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ops",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 270,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 9,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 5,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "connected",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "threads_connected"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "running",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "threads_running"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Active Threads",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 10,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Clients (timeout)",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "aborted_clients"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "Connects (attempts)",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "aborted_connects"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [
-                      "1s"
-                    ],
-                    "type": "derivative"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Aborted Connections",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ops",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 11,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 3,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "hits",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "qcache_hits"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "inserts",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "qcache_inserts"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Query Cache",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 242,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 12,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 3,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "refused(internal)",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "connection_errors_internal"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "refused(max connections)",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "connection_errors_max_connections"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Connections/Errors",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 14,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 3,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "deleted",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "innodb_rows_deleted"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "inserted",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "innodb_rows_inserted"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "read",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "innodb_rows_read"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "updated",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "innodb_rows_updated"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "InnoDB Rows",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "MySQL",
-          "fill": 1,
-          "id": 13,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "show": true,
-            "total": true,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "write",
-              "yaxis": 2
-            }
-          ],
-          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "alias": "read",
+              "alias": "[[tag_action]]",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -2666,12 +1117,18 @@
                 },
                 {
                   "params": [
+                    "action"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
                     "null"
                   ],
                   "type": "fill"
                 }
               ],
-              "measurement": "mysql_mysql",
+              "measurement": "sidekiq_transactions",
               "orderByTime": "ASC",
               "policy": "default",
               "refId": "A",
@@ -2680,7 +1137,7 @@
                 [
                   {
                     "params": [
-                      "innodb_data_read"
+                      "duration"
                     ],
                     "type": "field"
                   },
@@ -2690,63 +1147,13 @@
                   }
                 ]
               ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
-            },
-            {
-              "alias": "write",
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "mysql_mysql",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "innodb_data_writes"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "server",
-                  "operator": "=~",
-                  "value": "/^$Server$/"
-                }
-              ]
+              "tags": []
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "InnoDB Data",
+          "title": "SideKiq Transactions",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -2762,7 +1169,7 @@
           },
           "yaxes": [
             {
-              "format": "decbytes",
+              "format": "ms",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -2770,7 +1177,7 @@
               "show": true
             },
             {
-              "format": "decbytes",
+              "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -2786,42 +1193,18 @@
       "showTitle": false,
       "title": "Dashboard Row",
       "titleSize": "h6"
-    }
+    },
   ],
   "schemaVersion": 14,
   "style": "dark",
   "tags": [
-    "mysql",
-    "innodb",
-    "queries",
-    "connections"
+    "git"
   ],
   "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "MySQL",
-        "hide": 0,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "Server",
-        "options": [],
-        "query": "SHOW TAG VALUES WITH KEY=\"server\"",
-        "refresh": 1,
-        "regex": "",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
+    "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -2850,6 +1233,6 @@
     ]
   },
   "timezone": "",
-  "title": "MySQL",
-  "version": 0
+  "title": "Gitlab",
+  "version": 32
 }
