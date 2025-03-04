@@ -1,0 +1,13 @@
+Notes made while learning about Graphana, Prometheus, Jager, Open TSDB, etc
+
+* Graphana : 
+- DevOps Lifecycles : continous integration -> deployment -> monitoring -> testing
+- Why do we need continous monitoring?
+  - better network
+  - faster responses for threats
+  - minimises system downtime
+- What is continous monitoring -> cont observe and detect compliance issues and secuirity threats
+- Graphana :  multi platform open source tool that helps us visualize the data that provides charts , graphs, alerts, etc
+
+- Graphana can be used above systems like Elastic Search
+- Graphana key : eUTILGosA5JbPFm-_3WA_fTmJx2d_kRV0iKpYu2L3steAmqh8p4d7OgWn5MSfPt7CcKvwtsOFw3XnIWaGpu6ew==
